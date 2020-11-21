@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Restaurant Guide</string>
+    <string name="about">About</string>
+    <string name="contactUs">Contact Us</string>
+    <string name="share">Share</string>
+    <string name="email">Email:</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="info">faheem.ahmed@georgebrown.ca </string>
+    <string name="info2">abdirahman.ali@georgebrown.ca</string>
+    <string name="info3">edward.philip@georgebrown.ca</string>
+    <string name="studentInfo">Student Name and ID:</string>
+    <string name="about_us">About Us</string>
+    <string name="edward_philip_101056255">Edward Philip 101056255</string>
+    <string name="faheem_ahmed_101197078">Faheem Ahmed 101197078</string>
+    <string name="abdirahman_ali_101188723">Abdirahman Ali 101188723</string>
+    <string name="restaurant_guide">Restaurant Guide</string>
+    <string name="restaurant_2">Restaurant 2</string>
+    <string name="restaurant_list">Restaurant List</string>
+    <string name="restaurant_4">Restaurant 4</string>
+    <string name="restaurant_1">Restaurant 1</string>
+    <string name="add">Add</string>
+    <string name="restaurant_3">Restaurant 3</string>
+    <string name="share1">Share</string>
+    <string name="share2">Share to Facebook</string>
+    <string name="share3">Share to Twitter</string>
+
+
 </resources>
