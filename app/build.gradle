@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "ca.gbc.comp3074.restaurantguide"
-        minSdkVersion 14
+        minSdkVersion 18
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
