@@ -23,6 +23,11 @@
     <string name="share1">Share</string>
     <string name="share2">Share to Facebook</string>
     <string name="share3">Share to Twitter</string>
-
-
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="address">Address:</string>
+    <string name="rating">Rating:</string>
+    <string name="description">Description:</string>
+    <string name="todo">TODO</string>
+    <string name="twitter_share">Twitter share</string>
+    <string name="facebook_share">Facebook Share</string>
 </resources>
