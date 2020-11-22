@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class MainActivity extends AppCompatActivity {
 
     Button buttonGuide;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         buttonAbout=(Button) findViewById(R.id.aboutActivity);
         buttonGuide=(Button) findViewById(R.id.restaurantGuide);
 
@@ -35,6 +37,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 }

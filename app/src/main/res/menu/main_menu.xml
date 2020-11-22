@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/restaurant_guide"
+        android:title="@string/restaurant_guide"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/about"
+        android:title="@string/about"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/contactus"
+        android:title="@string/contactUs"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/share"
+        android:title="@string/share"
+        app:showAsAction="never"/>
+
+
+
+
+</menu>
