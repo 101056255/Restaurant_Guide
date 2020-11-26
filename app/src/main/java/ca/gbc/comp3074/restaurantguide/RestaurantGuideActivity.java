@@ -6,13 +6,39 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class RestaurantGuideActivity extends AppCompatActivity {
+
+    private Button addNewRest, restOne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_guide);
+
+        addNewRest = findViewById(R.id.btn_addRest);
+        restOne = findViewById(R.id.btn_one);
+
+        restOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent restOne = new Intent(RestaurantGuideActivity.this,
+                        RestaurantPageActivity.class);
+                startActivity(restOne);
+            }
+        });
+
+        addNewRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addRest = new Intent(RestaurantGuideActivity.this,
+                        AddRestaurant.class);
+                startActivity(addRest);
+            }
+        });
+
     }
 
     @Override
