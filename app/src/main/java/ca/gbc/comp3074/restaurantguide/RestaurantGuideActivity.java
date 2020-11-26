@@ -8,15 +8,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class RestaurantGuideActivity extends AppCompatActivity {
 
+    ListView listView;
+    Button addRes;
     private Button addNewRest, restOne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_guide);
+
+        listView=(ListView)findViewById(R.id.listview);
+        addRes=(Button) findViewById(R.id.addRest);
+
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        arrayList.add("Restaurant 1");
+        arrayList.add("Restaurant 2");
+
+        ArrayAdapter arrayAdapter= new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
+
+        listView.setAdapter(arrayAdapter);
+
+
+
+
+
 
         addNewRest = findViewById(R.id.btn_addRest);
         restOne = findViewById(R.id.btn_one);
@@ -40,6 +64,8 @@ public class RestaurantGuideActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,6 +101,12 @@ public class RestaurantGuideActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
+
+
+
+
+
 
 
 }
