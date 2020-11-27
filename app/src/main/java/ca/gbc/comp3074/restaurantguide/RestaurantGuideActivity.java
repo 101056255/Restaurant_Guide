@@ -3,6 +3,7 @@ package ca.gbc.comp3074.restaurantguide;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,32 +13,40 @@ import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class RestaurantGuideActivity extends AppCompatActivity{
 
+
     ListView listView;
-    Button addRes;
+    DatabaseHelper db;
+
 
     private ArrayAdapter arrayAdapter;
     private final ArrayList<String> arrayList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_guide);
 
+        db = new DatabaseHelper(this);
+
         listView=(ListView)findViewById(R.id.listview);
 
         arrayList.add("Restaurant 1");
         arrayList.add("Restaurant 2");
 
-        arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        viewData();
+
+        //arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
 
         listView.setAdapter(arrayAdapter);
 
-        Button addNewRest = findViewById(R.id.btn_addRest);
+        Button addNewRest = findViewById(R.id.addRest);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,8 +103,26 @@ public class RestaurantGuideActivity extends AppCompatActivity{
 
     }
 
-    public void addToList(String name)
+    /*public void addToList(String name)
     {
         arrayList.add(name);
+        arrayAdapter.notifyDataSetChanged();
+    }*/
+
+    public void viewData(){
+        Cursor cursor = db.viewData();
+
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data to show", Toast.LENGTH_SHORT).show();
+        }else{
+            while(cursor.moveToNext()){
+                arrayList.add(cursor.getString(cursor.getColumnIndex("name")));
+            }
+
+            arrayAdapter =new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
+            listView.setAdapter(arrayAdapter);
+
+
+        }
     }
 }

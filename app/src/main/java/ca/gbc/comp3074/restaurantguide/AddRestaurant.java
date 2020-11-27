@@ -41,6 +41,9 @@ public class AddRestaurant extends AppCompatActivity{
 
                     Toast.makeText(AddRestaurant.this, "Restaurant Added",
                             Toast.LENGTH_SHORT).show();
+                    restaurantGuideActivity.viewData();
+
+
                 }
                 else
                 {
@@ -50,4 +53,6 @@ public class AddRestaurant extends AppCompatActivity{
             }
         });
     }
+
+
 }
