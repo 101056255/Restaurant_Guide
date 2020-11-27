@@ -16,7 +16,7 @@
         <activity android:name=".RestaurantGuideActivity" />
         <activity
             android:name=".RestaurantPageActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".RestaurantGuideActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

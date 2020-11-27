@@ -8,6 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Restaurants.db";
@@ -42,18 +48,79 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public String getName()
+    private Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:C://sqlite/Restaurants.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
+    public String getName(String restName)
     {
         String res = null;
-        
+
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT name FROM " + TABLE_NAME + " WHERE id = 5",
-                null);
-        
+        Cursor cursor = db.rawQuery("SELECT " + NAME + " FROM " + TABLE_NAME +
+                        " WHERE name = ?", new String[]{restName});
+
         if (cursor.moveToFirst())
         {
             res = cursor.getString(cursor.getColumnIndex("name"));
         }
+        db.close();
+        return res;
+    }
+
+    public String getAddress(String restName)
+    {
+        String res = null;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + ADDRESS + " FROM " + TABLE_NAME +
+                        " WHERE name = ?", new String[]{restName});
+
+        if (cursor.moveToFirst())
+        {
+            res = cursor.getString(cursor.getColumnIndex("address"));
+        }
+        db.close();
+        return res;
+    }
+
+    public String getRating(String restName)
+    {
+        String res = null;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + RATING + " FROM " + TABLE_NAME +
+                " WHERE name = ?", new String[]{restName});
+
+        if (cursor.moveToFirst())
+        {
+            res = cursor.getString(cursor.getColumnIndex("rating"));
+        }
+        db.close();
+        return res;
+    }
+
+    public String getDescription(String restName)
+    {
+        String res = null;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + DESCRIPTION + " FROM " + TABLE_NAME +
+                " WHERE name = ?", new String[]{restName});
+
+        if (cursor.moveToFirst())
+        {
+            res = cursor.getString(cursor.getColumnIndex("description"));
+        }
+        db.close();
         return res;
     }
 
@@ -76,5 +143,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             return true;
         }
+    }
+
+    public Cursor viewData(){
+        SQLiteDatabase db= this.getReadableDatabase();
+        String query= "SELECT name FROM "+ TABLE_NAME;
+        Cursor cursor= db.rawQuery(query,null);
+        return cursor;
+
     }
 }

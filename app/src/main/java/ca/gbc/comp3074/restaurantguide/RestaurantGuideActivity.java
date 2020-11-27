@@ -3,29 +3,57 @@ package ca.gbc.comp3074.restaurantguide;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class RestaurantGuideActivity extends AppCompatActivity {
 
-    private Button addNewRest, restOne;
+    private ListView listView;
+    private DatabaseHelper db;
+
+
+    private ArrayAdapter<String> arrayAdapter;
+    private final ArrayList<String> arrayList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_guide);
 
-        addNewRest = findViewById(R.id.btn_addRest);
-        restOne = findViewById(R.id.btn_one);
+        listView = findViewById(R.id.listview);
+        db = new DatabaseHelper(this);
 
-        restOne.setOnClickListener(new View.OnClickListener() {
+        listView = findViewById(R.id.listview);
+
+        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,
+                arrayList);
+        viewData();
+
+        //arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+
+        arrayAdapter.notifyDataSetChanged();
+        listView.setAdapter(arrayAdapter);
+
+        Button addNewRest = findViewById(R.id.addRest);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent restOne = new Intent(RestaurantGuideActivity.this,
                         RestaurantPageActivity.class);
+                String restName = arrayList.get(position);
+                restOne.putExtra("restName", restName);
                 startActivity(restOne);
             }
         });
@@ -38,12 +66,12 @@ public class RestaurantGuideActivity extends AppCompatActivity {
                 startActivity(addRest);
             }
         });
-
+        System.out.println(arrayList.toString());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -73,8 +101,20 @@ public class RestaurantGuideActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
+    public void viewData() {
+        Cursor cursor = db.viewData();
 
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data to show", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                arrayList.add(cursor.getString(cursor.getColumnIndex("name")));
+            }
+
+            arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+            listView.setAdapter(arrayAdapter);
+        }
+    }
 }
