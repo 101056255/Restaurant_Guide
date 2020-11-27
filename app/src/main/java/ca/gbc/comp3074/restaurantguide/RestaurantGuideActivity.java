@@ -7,58 +7,57 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class RestaurantGuideActivity extends AppCompatActivity {
+public class RestaurantGuideActivity extends AppCompatActivity{
 
-    EditText resSearch;
     ListView listView;
     Button addRes;
-    ArrayList<String> arrayList;
-    ArrayAdapter<String> arrayAdapter;
+
+    private ArrayAdapter arrayAdapter;
+    private final ArrayList<String> arrayList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_guide);
 
-        resSearch=(EditText)findViewById(R.id.resSearch);
         listView=(ListView)findViewById(R.id.listview);
-        addRes=(Button) findViewById(R.id.addRest);
-
-        arrayList = new ArrayList<String>();
 
         arrayList.add("Restaurant 1");
         arrayList.add("Restaurant 2");
 
-        arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
 
         listView.setAdapter(arrayAdapter);
-        onBtnClick();
 
+        Button addNewRest = findViewById(R.id.btn_addRest);
 
-
-    }
-
-    public void onBtnClick(){
-        addRes.setOnClickListener(new View.OnClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v){
-                String result= resSearch.getText().toString();
-                arrayList.add(result);
-                arrayAdapter.notifyDataSetChanged();
-
-
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent restOne = new Intent(RestaurantGuideActivity.this,
+                        RestaurantPageActivity.class);
+                startActivity(restOne);
             }
         });
+
+        addNewRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addRest = new Intent(RestaurantGuideActivity.this,
+                        AddRestaurant.class);
+                startActivity(addRest);
+            }
+        });
+
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,11 +94,8 @@ public class RestaurantGuideActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-    
-
-
+    public void addToList(String name)
+    {
+        arrayList.add(name);
+    }
 }
