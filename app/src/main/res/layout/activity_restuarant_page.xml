@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_rest_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_restaurant_title" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txt_rest_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -67,10 +67,10 @@
         android:text="@string/rating"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_rest_address" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txt_rest_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.247"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_rest_rating" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
