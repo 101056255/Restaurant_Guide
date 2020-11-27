@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,16 +33,25 @@ public class AddRestaurant extends AppCompatActivity{
         description = findViewById(R.id.txt_desc);
         addButton = findViewById(R.id.btn_add);
 
+        final String nameText = name.getText().toString();
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isInserted = myDb.insertData(name.getText().toString(), address.getText().toString(),
-                        rating.getText().toString(), description.getText().toString());
+                boolean isInserted = myDb.insertData(nameText,
+                        address.getText().toString(),
+                        rating.getText().toString(),
+                        description.getText().toString());
 
                 if (isInserted) {
 
                     Toast.makeText(AddRestaurant.this, "Restaurant Added",
                             Toast.LENGTH_SHORT).show();
+
+                    Intent backToPage = new Intent(AddRestaurant.this,
+                            RestaurantGuideActivity.class);
+                    restaurantGuideActivity.viewData();
+                    startActivity(backToPage);
                 }
                 else
                 {
