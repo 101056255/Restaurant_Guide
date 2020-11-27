@@ -1,8 +1,6 @@
 package ca.gbc.comp3074.restaurantguide;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,8 +22,13 @@ public class RestaurantGuideActivity extends AppCompatActivity{
     private ListView listView;
     private DatabaseHelper db;
 
+    ListView listView;
+    DatabaseHelper db;
+
+
     private ArrayAdapter arrayAdapter;
     private final ArrayList<String> arrayList = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +38,23 @@ public class RestaurantGuideActivity extends AppCompatActivity{
         listView = findViewById(R.id.listview);
 
         db = new DatabaseHelper(this);
+        db = new DatabaseHelper(this);
+
+        listView=(ListView)findViewById(R.id.listview);
 
         arrayList.add("Restaurant 1");
         arrayList.add("Restaurant 2");
 
         arrayAdapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,
                 arrayList);
+        viewData();
+
+        //arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
 
         arrayAdapter.notifyDataSetChanged();
         listView.setAdapter(arrayAdapter);
 
-        Button addNewRest = findViewById(R.id.btn_addRest);
+        Button addNewRest = findViewById(R.id.addRest);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,6 +109,27 @@ public class RestaurantGuideActivity extends AppCompatActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void viewData(){
+        Cursor cursor = db.viewData();
+
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data to show", Toast.LENGTH_SHORT).show();
+        }else{
+            while(cursor.moveToNext()){
+                arrayList.add(cursor.getString(cursor.getColumnIndex("name")));
+            }
+
+            arrayAdapter =new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
+            listView.setAdapter(arrayAdapter);
+
+
+        }
+    /*public void addToList(String name)
+    {
+        arrayList.add(name);
+        arrayAdapter.notifyDataSetChanged();
+    }*/
 
     public void viewData(){
         Cursor cursor = db.viewData();
