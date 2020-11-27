@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".ContactUsActivity">
 
     <TextView
@@ -23,12 +24,12 @@
         android:id="@+id/txt_rest_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="432dp"
+        android:layout_marginBottom="468dp"
         android:text="@string/email"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
+        app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -37,10 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:text="@string/info"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.0" />
         app:layout_constraintTop_toBottomOf="@+id/txt_rest_address"
         app:layout_constraintVertical_bias="0.115" />
 
@@ -49,6 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info2"
+        android:textSize="25sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.443"
@@ -61,6 +67,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info3"
+        android:textSize="25sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.429"
