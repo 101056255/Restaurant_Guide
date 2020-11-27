@@ -31,15 +31,11 @@ public class AddRestaurant extends AppCompatActivity{
         description = findViewById(R.id.txt_desc);
         addButton = findViewById(R.id.btn_add);
 
-        final String nameText = name.getText().toString();
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isInserted = myDb.insertData(nameText,
-                        address.getText().toString(),
-                        rating.getText().toString(),
-                        description.getText().toString());
+                boolean isInserted = myDb.insertData(name.getText().toString(), address.getText().toString(),
+                        rating.getText().toString(), description.getText().toString());
 
                 if (isInserted) {
 
@@ -48,11 +44,6 @@ public class AddRestaurant extends AppCompatActivity{
                     restaurantGuideActivity.viewData();
 
 
-
-                    Intent backToPage = new Intent(AddRestaurant.this,
-                            RestaurantGuideActivity.class);
-                    restaurantGuideActivity.viewData();
-                    startActivity(backToPage);
                 }
                 else
                 {

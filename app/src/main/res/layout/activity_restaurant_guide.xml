@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RestaurantGuideActivity">
 
-    <TextView
-        android:id="@+id/textView11"
     <Button
         android:id="@+id/addRest"
         android:layout_width="wrap_content"
@@ -19,9 +17,8 @@
         android:shadowColor="#220B0B"
         android:shadowDx="5"
         android:shadowDy="5"
-        android:text="@string/restaurant_list"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="50sp" />
+        android:textSize="50sp"
         android:text="@string/add"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/listview"/>
@@ -41,11 +38,4 @@
         android:layout_below="@id/addRest"
         android:imeOptions="actionDone"/>
 
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="370dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="100dp" />
-
-</RelativeLayout>
 </RelativeLayout>
