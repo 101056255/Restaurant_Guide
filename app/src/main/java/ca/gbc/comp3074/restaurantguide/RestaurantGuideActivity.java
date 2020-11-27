@@ -6,13 +6,57 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
-public class RestaurantGuideActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class RestaurantGuideActivity extends AppCompatActivity{
+
+    ListView listView;
+    Button addRes;
+
+    private ArrayAdapter arrayAdapter;
+    private final ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_guide);
+
+        listView=(ListView)findViewById(R.id.listview);
+
+        arrayList.add("Restaurant 1");
+        arrayList.add("Restaurant 2");
+
+        arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+
+        listView.setAdapter(arrayAdapter);
+
+        Button addNewRest = findViewById(R.id.btn_addRest);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent restOne = new Intent(RestaurantGuideActivity.this,
+                        RestaurantPageActivity.class);
+                startActivity(restOne);
+            }
+        });
+
+        addNewRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addRest = new Intent(RestaurantGuideActivity.this,
+                        AddRestaurant.class);
+                startActivity(addRest);
+            }
+        });
+
     }
 
     @Override
@@ -50,5 +94,8 @@ public class RestaurantGuideActivity extends AppCompatActivity {
 
     }
 
-
+    public void addToList(String name)
+    {
+        arrayList.add(name);
+    }
 }

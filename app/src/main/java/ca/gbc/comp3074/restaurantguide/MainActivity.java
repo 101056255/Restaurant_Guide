@@ -10,12 +10,16 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonGuide;
-    Button buttonAbout;
+    DatabaseHelper myDB;
+
+    private Button buttonGuide;
+    private Button buttonAbout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myDB = new DatabaseHelper(this);
 
         buttonAbout=(Button) findViewById(R.id.aboutActivity);
         buttonGuide=(Button) findViewById(R.id.restaurantGuide);
