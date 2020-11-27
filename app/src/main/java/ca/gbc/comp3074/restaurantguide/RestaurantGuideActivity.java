@@ -7,18 +7,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class RestaurantGuideActivity extends AppCompatActivity {
+public class RestaurantGuideActivity extends AppCompatActivity{
 
     ListView listView;
     Button addRes;
-    private Button addNewRest, restOne;
+
+    private ArrayAdapter arrayAdapter;
+    private final ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +29,19 @@ public class RestaurantGuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_guide);
 
         listView=(ListView)findViewById(R.id.listview);
-        addRes=(Button) findViewById(R.id.addRest);
-
-        ArrayList<String> arrayList = new ArrayList<>();
 
         arrayList.add("Restaurant 1");
         arrayList.add("Restaurant 2");
 
-        ArrayAdapter arrayAdapter= new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
+        arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
 
         listView.setAdapter(arrayAdapter);
 
+        Button addNewRest = findViewById(R.id.btn_addRest);
 
-
-
-
-
-        addNewRest = findViewById(R.id.btn_addRest);
-        restOne = findViewById(R.id.btn_one);
-
-        restOne.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent restOne = new Intent(RestaurantGuideActivity.this,
                         RestaurantPageActivity.class);
                 startActivity(restOne);
@@ -64,8 +58,6 @@ public class RestaurantGuideActivity extends AppCompatActivity {
         });
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,11 +94,8 @@ public class RestaurantGuideActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-
-
+    public void addToList(String name)
+    {
+        arrayList.add(name);
+    }
 }
