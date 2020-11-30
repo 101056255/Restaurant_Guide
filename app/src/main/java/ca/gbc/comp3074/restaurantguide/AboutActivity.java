@@ -39,7 +39,7 @@ public class AboutActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.share) {
-            Intent intent = new Intent(AboutActivity.this, AboutActivity.class);
+            Intent intent = new Intent(AboutActivity.this, ShareActivity.class);
             startActivity(intent);
             return true;
         }

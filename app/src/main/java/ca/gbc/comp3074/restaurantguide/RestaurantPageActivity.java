@@ -95,7 +95,7 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
 
         googleMap.addMarker(new MarkerOptions()
                 .position(address)
-                .title("Marker of restaurant"));
+                .title(nameRest));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(address, 15));
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
