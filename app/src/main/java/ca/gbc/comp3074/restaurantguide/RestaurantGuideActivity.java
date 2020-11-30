@@ -1,7 +1,9 @@
 package ca.gbc.comp3074.restaurantguide;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -40,8 +42,6 @@ public class RestaurantGuideActivity extends AppCompatActivity {
                 arrayList);
         viewData();
 
-        //arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
-
         arrayAdapter.notifyDataSetChanged();
         listView.setAdapter(arrayAdapter);
 
@@ -55,6 +55,29 @@ public class RestaurantGuideActivity extends AppCompatActivity {
                 String restName = arrayList.get(position);
                 restOne.putExtra("restName", restName);
                 startActivity(restOne);
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                final String name = arrayList.get(position);
+
+                new AlertDialog.Builder(RestaurantGuideActivity.this)
+                        .setTitle("Delete " + name)
+                        .setMessage("Are you sure you want to delete " + name + "?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                arrayList.remove(position);
+                                arrayAdapter.notifyDataSetChanged();
+                                db.deleteRow(name);
+                            }
+                        })
+                        .setNegativeButton("No", null).show();
+
+                return true;
             }
         });
 

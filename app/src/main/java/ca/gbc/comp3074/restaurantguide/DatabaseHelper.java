@@ -20,19 +20,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "restaurants_table";
     private static final String ID = "id";
     private static final String NAME = "name";
+    private static final String PHONE = "phone";
     private static final String ADDRESS = "address";
     private static final String DESCRIPTION = "description";
     private static final String RATING = "rating";
+    private static final String TAGS = "tags";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
         SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME + "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name TEXT, address TEXT, rating TEXT, description TEXT)");
+                "name TEXT, phone TEXT, address TEXT, rating TEXT, description TEXT, tags TEXT)");
     }
 
     @Override
@@ -48,18 +50,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    private Connection connect() {
-        // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/Restaurants.db";
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
-
     public String getName(String restName)
     {
         String res = null;
@@ -71,6 +61,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst())
         {
             res = cursor.getString(cursor.getColumnIndex("name"));
+        }
+        db.close();
+        return res;
+    }
+
+    public String getPhone(String restName)
+    {
+        String res = null;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + PHONE + " FROM " + TABLE_NAME +
+                " WHERE name = ?", new String[]{restName});
+
+        if (cursor.moveToFirst())
+        {
+            res = cursor.getString(cursor.getColumnIndex("phone"));
         }
         db.close();
         return res;
@@ -124,11 +130,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean insertData(String name, String address, String rating, String description)
+    public String getTags(String restName)
+    {
+        String res = null;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + NAME + " FROM " + TABLE_NAME +
+                " WHERE name = ?", new String[]{restName});
+
+        if (cursor.moveToFirst())
+        {
+            res = cursor.getString(cursor.getColumnIndex("tags"));
+        }
+        db.close();
+        return res;
+    }
+
+    public boolean deleteRow(String name)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME +
+                " WHERE name = ?", new String[]{name});
+
+        db.close();
+
+        return true;
+    }
+
+    public boolean insertData(String name, String phone, String address, String rating, String description)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(NAME, name);
+        contentValues.put(PHONE, phone);
         contentValues.put(ADDRESS, address);
         contentValues.put(RATING, rating);
         contentValues.put(DESCRIPTION, description);

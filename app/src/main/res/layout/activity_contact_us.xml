@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/contact_us"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        app:layout_constraintBottom_toTopOf="@+id/txt_rest_address"
+        app:layout_constraintBottom_toTopOf="@+id/address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.45" />
 
     <TextView
-        android:id="@+id/txt_rest_address"
+        android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="468dp"
@@ -30,26 +30,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" /><![CDATA[
+
+    app:layout_constraintTop_toBottomOf="@+id/txt_rest_address"
+        app:layout_constraintVertical_bias="0.115" />
+
+
+
+
+
+    ]]>
 
     <TextView
-        android:id="@+id/txt_rest_rating"
+        android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginBottom="332dp"
         android:text="@string/info"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.0" />
-        app:layout_constraintTop_toBottomOf="@+id/txt_rest_address"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintTop_toBottomOf="@+id/address"
+        app:layout_constraintVertical_bias="0.607" />
 
     <TextView
-        android:id="@+id/txt_rest_desc"
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info2"
@@ -59,7 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.443"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_rest_rating"
+        app:layout_constraintTop_toBottomOf="@+id/rating"
         app:layout_constraintVertical_bias="0.071" />
 
     <TextView
@@ -73,6 +80,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.429"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_rest_desc"
+        app:layout_constraintTop_toBottomOf="@+id/description"
         app:layout_constraintVertical_bias="0.117" />
 </androidx.constraintlayout.widget.ConstraintLayout>
