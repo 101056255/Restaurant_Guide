@@ -7,12 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ public class RestaurantGuideActivity extends AppCompatActivity {
 
     private ListView listView;
     private DatabaseHelper db;
+    private EditText search;
 
 
     private ArrayAdapter<String> arrayAdapter;
@@ -34,6 +38,7 @@ public class RestaurantGuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_guide);
 
         listView = findViewById(R.id.listview);
+        search = findViewById(R.id.resSearch);
         db = new DatabaseHelper(this);
 
         listView = findViewById(R.id.listview);
@@ -78,6 +83,23 @@ public class RestaurantGuideActivity extends AppCompatActivity {
                         .setNegativeButton("No", null).show();
 
                 return true;
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                (RestaurantGuideActivity.this).arrayAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 

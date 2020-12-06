@@ -6,13 +6,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class ShareActivity extends AppCompatActivity {
+
+    private Button shareApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
+
+        shareApp = findViewById(R.id.btn_share_app);
+
+        shareApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, "Use this app to share your" +
+                        " favourite restaurants!");
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

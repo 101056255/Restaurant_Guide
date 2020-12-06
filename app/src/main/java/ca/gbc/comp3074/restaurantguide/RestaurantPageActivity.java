@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,11 +32,12 @@ import java.util.Objects;
 public class RestaurantPageActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private DatabaseHelper myDb;
-    private TextView restName, restAddress, restRating, restDesc, restPhone;
+    private TextView restName, restAddress, restRating, restDesc, restPhone, restTags;
     private String nameRest;
     private MapView mapView;
     private Button emailBtn, shareBtn;
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
         restPhone = findViewById(R.id.txt_rest_phone);
         emailBtn = findViewById(R.id.btn_sendEmail);
         shareBtn = findViewById(R.id.btn_share);
+        restTags = findViewById(R.id.txt_tags);
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -74,6 +77,15 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
         restRating.setText(myDb.getRating(nameRest));
         restDesc.setText(myDb.getDescription(nameRest));
         restPhone.setText(myDb.getPhone(nameRest));
+
+        if(myDb.getTags(nameRest) != null)
+        {
+            restTags.setText(myDb.getTags(nameRest));
+        }
+        else
+        {
+            restTags.setText("No tags provided");
+        }
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 

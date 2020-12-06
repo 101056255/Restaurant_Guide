@@ -58,8 +58,8 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="352dp"
-        android:layout_height="205dp"
+        android:layout_width="357dp"
+        android:layout_height="168dp"
         android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,8 +94,8 @@
 
     <TextView
         android:id="@+id/txt_rest_desc"
-        android:layout_width="219dp"
-        android:layout_height="171dp"
+        android:layout_width="295dp"
+        android:layout_height="95dp"
         android:layout_marginTop="12dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -162,4 +162,28 @@
         android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sendEmail" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Tags: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_rest_desc" />
+
+    <TextView
+        android:id="@+id/txt_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_rest_desc" />
 </androidx.constraintlayout.widget.ConstraintLayout>
