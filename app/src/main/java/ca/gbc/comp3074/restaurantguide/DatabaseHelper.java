@@ -157,7 +157,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertData(String name, String phone, String address, String rating, String description)
+    public boolean insertData(String name, String phone, String address, String rating,
+                              String description)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -177,6 +178,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             return true;
         }
+    }
+
+    //public boolean updateData(String name, String phone, String address, String rating,
+                              //String description)
+    {
+
     }
 
     public Cursor viewData(){

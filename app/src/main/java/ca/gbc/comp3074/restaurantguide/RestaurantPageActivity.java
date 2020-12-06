@@ -6,11 +6,14 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +34,7 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
     private TextView restName, restAddress, restRating, restDesc, restPhone;
     private String nameRest;
     private MapView mapView;
+    private Button emailBtn, shareBtn;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -45,6 +49,8 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
         restRating = findViewById(R.id.txt_rest_rating);
         restDesc = findViewById(R.id.txt_rest_desc);
         restPhone = findViewById(R.id.txt_rest_phone);
+        emailBtn = findViewById(R.id.btn_sendEmail);
+        shareBtn = findViewById(R.id.btn_share);
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -70,6 +76,31 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
         restPhone.setText(myDb.getPhone(nameRest));
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        emailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_SUBJECT, nameRest);
+                email.putExtra(Intent.EXTRA_TEXT, "Check out this restaurant! \n" +
+                        "Name: " + myDb.getName(nameRest) + "\n" +
+                        "Address: " + myDb.getAddress(nameRest) + "\n" +
+                        "Phone Number: " + myDb.getPhone(nameRest));
+                email.setType("message/rfc822");
+                startActivity(email);
+            }
+        });
+
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, "Check out this place! \n" +
+                        myDb.getName(nameRest));
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
 
     }
 
