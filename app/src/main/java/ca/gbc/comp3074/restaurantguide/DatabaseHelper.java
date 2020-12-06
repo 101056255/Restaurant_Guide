@@ -135,7 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String res = null;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT " + NAME + " FROM " + TABLE_NAME +
+        Cursor cursor = db.rawQuery("SELECT " + TAGS + " FROM " + TABLE_NAME +
                 " WHERE name = ?", new String[]{restName});
 
         if (cursor.moveToFirst())
@@ -158,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean insertData(String name, String phone, String address, String rating,
-                              String description)
+                              String description, String tags)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -167,6 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(ADDRESS, address);
         contentValues.put(RATING, rating);
         contentValues.put(DESCRIPTION, description);
+        contentValues.put(TAGS, tags);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
@@ -178,12 +179,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             return true;
         }
-    }
-
-    //public boolean updateData(String name, String phone, String address, String rating,
-                              //String description)
-    {
-
     }
 
     public Cursor viewData(){

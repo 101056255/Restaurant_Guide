@@ -23,7 +23,7 @@ import java.util.Locale;
 public class AddRestaurant extends AppCompatActivity{
 
     private DatabaseHelper myDb;
-    private EditText name, address, rating, description, phone;
+    private EditText name, address, rating, description, phone, tags;
     private Button addButton;
 
     RestaurantGuideActivity restaurantGuideActivity;
@@ -42,6 +42,7 @@ public class AddRestaurant extends AppCompatActivity{
         rating = findViewById(R.id.txt_rating);
         description = findViewById(R.id.txt_desc);
         addButton = findViewById(R.id.btn_add);
+        tags = findViewById(R.id.tags_text);
 
         name.addTextChangedListener(textWatcher);
         phone.addTextChangedListener(textWatcher);
@@ -59,7 +60,8 @@ public class AddRestaurant extends AppCompatActivity{
                 boolean isInserted = myDb.insertData(name.getText().toString().trim(),
                         phoneNum,
                         address.getText().toString().trim(),
-                        rating.getText().toString().trim(), description.getText().toString().trim());
+                        rating.getText().toString().trim(), description.getText().toString().trim(),
+                        tags.getText().toString().trim());
 
                 if (isInserted) {
 

@@ -35,4 +35,7 @@
     <string name="search">Search</string>
     <string name="title_activity_maps">Map</string>
     <string name="name">Name</string>
+    <string name="tags">Tags</string>
+    <string name="share_app">Share app</string>
+    <string name="share_the_app">Share the app!</string>
 </resources>
