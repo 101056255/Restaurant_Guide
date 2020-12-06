@@ -10,26 +10,25 @@
 
     <Button
         android:id="@+id/restaurantGuide"
-        android:layout_width="222dp"
-        android:layout_height="95dp"
+        android:layout_width="188dp"
+        android:layout_height="84dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/restaurant_guide" />
+        android:text="@string/restaurant_guide"
+        style="@style/buttonStyle"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/aboutActivity"
-        android:layout_width="222dp"
-        android:layout_height="95dp"
+        android:layout_width="188dp"
+        android:layout_height="84dp"
         android:layout_below="@+id/restaurantGuide"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:textSize="20sp"
-        android:text="@string/about_activity" />
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-black"
+        style="@style/secondButton"
         android:text="@string/about_activity"
-        android:typeface="normal" />
+        android:textSize="20sp" />
+
 
 
 </RelativeLayout>

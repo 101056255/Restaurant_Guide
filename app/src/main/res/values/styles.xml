@@ -5,6 +5,16 @@
         <item name="colorPrimary">#000000</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#000000</item>
+        <item name="android:fontFamily">@font/playfair</item>
+        <item name="android:itemBackground">@color/colorAccent</item>
     </style>
+
+  <style name= "buttonStyle">
+      <item name="android:background">@color/colorAccent</item>
+  </style>
+    <style name= "secondButton">
+        <item name="android:background">@color/aboutColorAccent</item>
+    </style>
+
 
 </resources>
