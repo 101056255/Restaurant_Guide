@@ -67,7 +67,10 @@ public class AddRestaurant extends AppCompatActivity{
 
                     Toast.makeText(AddRestaurant.this, "Restaurant Added",
                             Toast.LENGTH_SHORT).show();
-                    restaurantGuideActivity.viewData();
+
+                    Intent main = new Intent(getApplicationContext(), RestaurantGuideActivity.class);
+                    startActivity(main);
+                    finish();
                 }
                 else
                 {
