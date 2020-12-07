@@ -38,4 +38,6 @@
     <string name="tags">Tags</string>
     <string name="share_app">Share app</string>
     <string name="share_the_app">Share the app!</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone">Phone</string>
 </resources>

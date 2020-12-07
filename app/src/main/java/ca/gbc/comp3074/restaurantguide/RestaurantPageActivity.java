@@ -1,11 +1,13 @@
 package ca.gbc.comp3074.restaurantguide;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.LocalActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,7 +37,8 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
     private TextView restName, restAddress, restRating, restDesc, restPhone, restTags;
     private String nameRest;
     private MapView mapView;
-    private Button emailBtn, shareBtn;
+    private Button emailBtn, shareBtn, editBtn;
+    private LatLng address;
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -54,6 +57,7 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
         emailBtn = findViewById(R.id.btn_sendEmail);
         shareBtn = findViewById(R.id.btn_share);
         restTags = findViewById(R.id.txt_tags);
+        editBtn = findViewById(R.id.btn_edit);
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -114,10 +118,21 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
             }
         });
 
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent edit = new Intent(RestaurantPageActivity.this,
+                        EditRestaurant.class);
+                edit.putExtra("restaurantName", nameRest);
+                startActivity(edit);
+            }
+        });
+
+        address = getLocationFromAddress(getApplicationContext(), myDb.getAddress(nameRest));
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
@@ -133,8 +148,6 @@ public class RestaurantPageActivity extends AppCompatActivity implements OnMapRe
     public void onMapReady(GoogleMap googleMap) {
 
         googleMap.getUiSettings().setAllGesturesEnabled(true);
-
-        LatLng address = getLocationFromAddress(this, myDb.getAddress(nameRest));
 
         googleMap.addMarker(new MarkerOptions()
                 .position(address)

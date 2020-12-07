@@ -8,12 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Restaurants.db";
@@ -62,7 +56,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             res = cursor.getString(cursor.getColumnIndex("name"));
         }
-        db.close();
         return res;
     }
 
@@ -78,7 +71,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             res = cursor.getString(cursor.getColumnIndex("phone"));
         }
-        db.close();
         return res;
     }
 
@@ -94,7 +86,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             res = cursor.getString(cursor.getColumnIndex("address"));
         }
-        db.close();
         return res;
     }
 
@@ -110,7 +101,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             res = cursor.getString(cursor.getColumnIndex("rating"));
         }
-        db.close();
         return res;
     }
 
@@ -126,7 +116,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             res = cursor.getString(cursor.getColumnIndex("description"));
         }
-        db.close();
         return res;
     }
 
@@ -142,7 +131,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             res = cursor.getString(cursor.getColumnIndex("tags"));
         }
-        db.close();
         return res;
     }
 
@@ -152,7 +140,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_NAME +
                 " WHERE name = ?", new String[]{name});
 
-        db.close();
 
         return true;
     }
@@ -187,5 +174,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor= db.rawQuery(query,null);
         return cursor;
 
+    }
+
+    public boolean updateData(String name, String phone, String address, String rating,
+                              String description, String tags, String restName)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        if(!name.equals("") && name != null)
+        {
+            contentValues.put(NAME, name);
+        }
+
+
+        if(phone != null)
+        {
+            contentValues.put(PHONE, phone);
+        }
+
+
+        if(!address.equals("") && address != null)
+        {
+            contentValues.put(ADDRESS, address);
+        }
+
+
+        if(!rating.equals("") && rating != null)
+        {
+            contentValues.put(RATING, rating);
+        }
+
+
+        if(!description.equals("") && description != null)
+        {
+            contentValues.put(DESCRIPTION, description);
+        }
+
+
+        if(!tags.equals("") && tags != null)
+        {
+            contentValues.put(TAGS, tags);
+        }
+
+
+        long result = db.update(TABLE_NAME, contentValues, "name = ?",
+                new String[]{restName});
+
+        return result != -1;
     }
 }
