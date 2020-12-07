@@ -81,7 +81,6 @@ public class RestaurantGuideActivity extends AppCompatActivity {
                             }
                         })
                         .setNegativeButton("No", null).show();
-
                 return true;
             }
         });
